@@ -1,0 +1,228 @@
+# TechStore E-commerce Platform Requirements
+
+## Node.js Dependencies (from package.json)
+
+### Core Dependencies
+- express@^4.18.2                 # Web framework
+- mongoose@^7.5.0                 # MongoDB ODM
+- cors@^2.8.5                     # Cross-origin resource sharing
+- helmet@^7.0.0                   # Security headers
+- dotenv@^16.3.1                  # Environment variables
+- compression@^1.7.4              # Gzip compression
+
+### Authentication & Security
+- bcryptjs@^2.4.3                 # Password hashing
+- jsonwebtoken@^9.0.2             # JWT tokens
+- express-rate-limit@^6.10.0      # Rate limiting
+- express-validator@^7.0.1        # Input validation
+- cookie-parser@^1.4.6            # Cookie handling
+- express-session@^1.17.3         # Session management
+- connect-mongo@^5.0.0            # MongoDB session store
+
+### File Upload & Email
+- multer@^1.4.5-lts.1             # File upload handling
+- nodemailer@^6.9.4               # Email sending
+
+### Real-time Features
+- socket.io@^4.7.2                # WebSocket support
+
+### Utilities
+- moment@^2.29.4                  # Date manipulation
+- uuid@^9.0.0                     # UUID generation
+- axios@^1.5.0                    # HTTP client
+- winston@^3.10.0                 # Logging
+
+## Development Dependencies
+- nodemon@^3.0.1                  # Development server
+- jest@^29.6.4                    # Testing framework
+- supertest@^6.3.3                # API testing
+- eslint@^8.47.0                  # Code linting
+- postcss@^8.4.27                 # CSS processing
+- webpack@^5.88.2                 # Module bundler
+- gh-pages@^6.0.0                 # GitHub Pages deployment
+- concurrently@^8.2.0             # Run multiple scripts
+
+## System Requirements
+
+### Node.js Version
+- Node.js >= 14.0.0
+- npm >= 6.0.0
+
+### Database
+- MongoDB >= 4.4.0
+
+### Browser Support
+- Chrome >= 70
+- Firefox >= 65
+- Safari >= 12
+- Edge >= 79
+
+## Installation Instructions
+
+1. **Install Node.js**
+   - Download from https://nodejs.org/
+   - Verify installation: `node --version` and `npm --version`
+
+2. **Install MongoDB**
+   - Download from https://www.mongodb.com/try/download/community
+   - Start MongoDB service: `mongod`
+
+3. **Clone Repository**
+   ```bash
+   git clone https://github.com/yourusername/techstore.git
+   cd techstore
+   ```
+
+4. **Install Dependencies**
+   ```bash
+   npm install
+   ```
+
+5. **Environment Setup**
+   - Copy `.env.example` to `.env`
+   - Update environment variables with your values
+
+6. **Start Development Server**
+   ```bash
+   npm run dev
+   ```
+
+## Environment Variables Required
+
+```env
+# Server Configuration
+NODE_ENV=development
+PORT=3000
+
+# Database
+DB_CONNECTION_STRING=mongodb://localhost:27017/techstore
+
+# Authentication
+JWT_SECRET=your-jwt-secret-key
+SESSION_SECRET=your-session-secret
+
+# Email Configuration
+EMAIL_SERVICE=gmail
+EMAIL_USER=your-email@gmail.com
+EMAIL_PASSWORD=your-app-password
+ADMIN_EMAIL=yusuphlameck220@gmail.com
+
+# Payment Integration
+MPESA_CONSUMER_KEY=your-mpesa-consumer-key
+MPESA_CONSUMER_SECRET=your-mpesa-consumer-secret
+MPESA_SHORTCODE=your-mpesa-shortcode
+MPESA_PASSKEY=your-mpesa-passkey
+
+# NMB Bank API (if available)
+NMB_API_KEY=your-nmb-api-key
+NMB_API_SECRET=your-nmb-api-secret
+
+# Client URL (for CORS)
+CLIENT_URL=http://localhost:3000
+```
+
+## Production Deployment
+
+### Heroku Deployment
+1. Install Heroku CLI
+2. Login: `heroku login`
+3. Create app: `heroku create techstore-app`
+4. Set environment variables: `heroku config:set NODE_ENV=production`
+5. Deploy: `git push heroku main`
+
+### Vercel Deployment
+1. Install Vercel CLI: `npm i -g vercel`
+2. Login: `vercel login`
+3. Deploy: `vercel --prod`
+
+### GitHub Pages (Frontend Only)
+1. Build: `npm run build`
+2. Deploy: `npm run deploy`
+
+## Testing
+
+### Run Tests
+```bash
+npm test                    # Run all tests
+npm run test:watch         # Run tests in watch mode
+npm run test:integration   # Run integration tests
+```
+
+### Test Coverage
+- Minimum 80% code coverage required
+- Tests include unit tests, integration tests, and API tests
+
+## Performance Optimization
+
+### Frontend
+- Minified CSS/JS files
+- Image optimization
+- Lazy loading
+- Caching strategies
+
+### Backend
+- Database indexing
+- Query optimization
+- Compression middleware
+- Rate limiting
+
+## Security Features
+
+- Helmet.js security headers
+- CORS protection
+- Rate limiting
+- Input validation
+- SQL injection prevention
+- XSS protection
+- CSRF protection
+- Secure cookie handling
+
+## Browser Compatibility
+
+### Required Features
+- ES6+ support
+- Fetch API
+- CSS Grid
+- Flexbox
+- Local Storage
+- Session Storage
+
+### Polyfills Included
+- Promise polyfill for older browsers
+- Fetch polyfill
+- CSS Grid polyfill (if needed)
+
+## Third-Party Services
+
+### Required Services
+- MongoDB Atlas (database hosting)
+- SendGrid/Gmail (email service)
+- Cloudinary (image hosting)
+- Stripe/PayPal (payment processing)
+
+### Optional Services
+- Google Analytics
+- Sentry (error tracking)
+- Redis (caching)
+- AWS S3 (file storage)
+
+## Maintenance
+
+### Regular Updates
+- Keep dependencies updated
+- Security patches
+- Performance monitoring
+- Database maintenance
+
+### Monitoring
+- Server uptime monitoring
+- Error logging
+- Performance metrics
+- User analytics
+
+## Support
+
+For technical support:
+- Email: yusuphlameck220@gmail.com
+- GitHub Issues: https://github.com/yourusername/techstore/issues
+- Documentation: https://github.com/yourusername/techstore/wiki
