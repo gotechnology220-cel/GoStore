@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Catalog</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+        .product-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .product-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .whatsapp-btn {
+            background: linear-gradient(45deg, #25D366, #128C7E);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .whatsapp-btn:hover {
+            background: linear-gradient(45deg, #128C7E, #25D366);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .whatsapp-icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .product-info {
+                padding: 20px;
+            }
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🛍️ Our Products</h1>
+        <p>Discover amazing products and chat with us on WhatsApp!</p>
+    </div>
+
+    <div class="products-grid" id="productsGrid">
+        <!-- Products will be loaded here by JavaScript -->
+    </div>
+
+    <script>
+        // Product data
+        const products = [
+            {
+                id: 1,
+                title: "Full Set 4 Camera",
+                price: "TSh 450,000 Kufungiwa 150,000",
+                description: "Camera nne(4) + DVR 8ch + HDD 1TB + BNC 10(pcs) + PowerPin 5(pcs) + Coaxial Cable 100M .",
+                image: "images/fullkit.png"
+                
+            },
+            {
+                id: 2,
+                title: "Indour camera (camera ya ndani)",
+                price: "TSh 50,000",
+                description: ".",
+                image: "images/Aindour.png"
+            },
+            {
+                id: 3,
+                title: "Outdour camera (camera ya nje)",
+                price: "TSh 50,000",
+                description: "Ina uwezo wa kuona mita 100.",
+                image: "images/analogoutdor.png"
+            },
+            {
+                id: 4,
+                title: "Coaxial cable",
+                price: "TSh 100,000 ",
+                description: "wire imara unaopitisha picha pamoja na power mita mia(100).",
+                image: "images/coaxial.png"
+            },
+            {
+                id: 5,
+                title: "Cat6 cable (ethenet)",
+                price: "TSh 100,000",
+                description: "wire imara wa internet mita mia(100).",
+                image: "images/cat6.png"
+            },
+            {
+                id: 6,
+                title: "RJ45",
+                price: "TSh 500",
+                description: "Portable for easy installation.",
+                image: "images/rj45.jpg"
+            },
+            {
+                id: 7,
+                title: "DVR 4channel",
+                price: "TSh 150,000",
+                description: "Inapokea camera nne(4) tu pia inaruhusu internet pamoja kuunganisha simu na camera.",
+                image: "images/DVR11 4CH.webp"
+            },
+            {
+                id: 8,
+                title: "DVR 8channel",
+                price: "TSh 180,000",
+                description: "Inapokea camera nane(8) tu pia inaruhusu internet na kuunganisha camera na simu.",
+                image: "images/DVR11 8CH.webp"
+            },
+            {
+                id: 9,
+                title: "Power supply 4ch 12v",
+                price: "TSh 110,000",
+                description: "Inatoa umeme wa 12volt kwa camera nne(4).",
+                image: "images/POWERSUPPLY.png"
+            },
+            {
+                id: 10,
+                title: "Power Buckup",
+                price: "TSh 180,000",
+                description: "Inatunza umeme kwa ajili ya camera endapo umeme umekatika .",
+                image: "images/PowerBackup.jpg"
+            },
+            {
+                id: 11,
+                title: "Power supply 8ch",
+                price: "TSh 125,000",
+                description: "inatoa umeme wa 12volt kwa camera nane(8).",
+                image: "images/POWERSPPLY.jpg"
+            },
+            {
+                id: 12,
+                title: "WiFi Router ",
+                price: "TSh 90,000",
+                description: "ina speed ya 300Mbps kwa 250mita na inatoa internet kwa watumia 32.",
+                image: "images/Router.png"
+            }
+        ];
+
+        const whatsappNumber = "+255744065662";
+
+        function createProductCard(product) {
+            return `
+                <div class="product-card">
+                    <img src="${product.image}" alt="${product.title}" class="product-image" 
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="image-placeholder" style="display: none;">
+                        📷 ${product.title}
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">${product.title}</h3>
+                        <div class="product-price">${product.price}</div>
+                        <p class="product-description">${product.description}</p>
+                        <button class="whatsapp-btn" onclick="openWhatsApp('${product.title}', '${product.price}')">
+                            <svg class="whatsapp-icon" viewBox="0 0 24 24">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                            </svg>
+                            Chat on WhatsApp
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function openWhatsApp(productTitle, productPrice) {
+            const message = `Hello! I'm interested in the ${productTitle} (${productPrice}). Could you please provide more information?`;
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${whatsappNumber.replace('+', '')}?text=${encodedMessage}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Load products on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const productsGrid = document.getElementById('productsGrid');
+            products.forEach(product => {
+                productsGrid.innerHTML += createProductCard(product);
+            });
+        });
+    </script>
+</body>
+</html>

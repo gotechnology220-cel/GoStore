@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechStore - Professional Electronics</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <title>Our Services</title>
     <style>
         * {
             margin: 0;
@@ -13,1332 +12,222 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Arial', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
         }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
         .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #667eea;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #667eea;
-        }
-
-        .cart-icon {
-            position: relative;
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .cart-icon:hover {
-            transform: scale(1.05);
-        }
-
-        .cart-count {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: #ff4757;
-            color: white;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        /* Main Content */
-        .main-content {
-            margin-top: 80px;
-            padding: 2rem 0;
-        }
-
-        .hero {
             text-align: center;
-            padding: 3rem 0;
+            margin-bottom: 40px;
             color: white;
         }
 
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        .hero p {
+        .header p {
             font-size: 1.2rem;
-            margin-bottom: 2rem;
             opacity: 0.9;
         }
 
-        /* Products Grid */
-        .products-section {
-            background: white;
-            padding: 4rem 0;
-            border-radius: 20px 20px 0 0;
-            margin-top: 2rem;
-        }
-
-        .products-grid {
+        .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid #f0f0f0;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .product-image {
+            gap: 25px;
+            max-width: 1200px;
             width: 100%;
-            height: 200px;
-            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+        }
+
+        .service-button {
+            background: white;
+            border: none;
+            border-radius: 15px;
+            padding: 30px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            text-decoration: none;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: #667eea;
-            border-bottom: 1px solid #f0f0f0;
+            text-align: center;
+            position: relative;
             overflow: hidden;
         }
 
-        .product-image img {
+        .service-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
         }
 
-        .product-image img:hover {
-            transform: scale(1.05);
+        .service-button:hover:before {
+            left: 100%;
         }
 
-        .product-image .fallback-icon {
+        .service-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .service-icon {
             font-size: 3rem;
+            margin-bottom: 15px;
             color: #667eea;
         }
 
-        .product-info {
-            padding: 1.5rem;
-        }
-
-        .product-title {
-            font-size: 1.2rem;
+        .service-title {
+            font-size: 1.3rem;
             font-weight: bold;
-            margin-bottom: 0.5rem;
             color: #333;
+            margin-bottom: 10px;
         }
 
-        .product-description {
+        .service-description {
+            font-size: 0.95rem;
             color: #666;
-            margin-bottom: 1rem;
             line-height: 1.4;
         }
 
-        .product-price {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #667eea;
-            margin-bottom: 1rem;
-        }
-
-        .product-actions {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .btn {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .btn-primary {
-            background: #667eea;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #5a6fd8;
-            transform: translateY(-2px);
-        }
-
-        .btn-success {
-            background: #2ed573;
-            color: white;
-            flex: 1;
-        }
-
-        .btn-success:hover {
-            background: #26d065;
-        }
-
-        .btn-warning {
-            background: #ffa502;
-            color: white;
-        }
-
-        .btn-warning:hover {
-            background: #ff9500;
-        }
-
-        .btn-danger {
-            background: #ff4757;
-            color: white;
-        }
-
-        .btn-danger:hover {
-            background: #ff3742;
-        }
-
-        .social-buttons {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-        }
-
-        .btn-social {
-            flex: 1;
-            padding: 0.4rem;
-            font-size: 0.8rem;
-        }
-
-        .btn-whatsapp { background: #25d366; color: white; }
-        .btn-facebook { background: #1877f2; color: white; }
-        .btn-instagram { background: #e4405f; color: white; }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 2000;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            background: white;
-            margin: 2% auto;
-            padding: 2rem;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 500px;
-            position: relative;
-            animation: modalSlideIn 0.3s ease-out;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal-content.large {
-            max-width: 1000px;
-        }
-
-        @keyframes modalSlideIn {
-            from {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #666;
-        }
-
-        .close:hover {
-            color: #333;
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: #333;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .cart-item:last-child {
-            border-bottom: none;
-        }
-
-        .cart-total {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #667eea;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 2px solid #f0f0f0;
-        }
-
-        .payment-methods {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .payment-btn {
-            flex: 1;
-            padding: 1rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            background: white;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .payment-btn:hover,
-        .payment-btn.selected {
-            border-color: #667eea;
-            background: #f8f9ff;
-        }
-
-        /* Enhanced Admin Panel Styles */
-        .admin-panel {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            margin-top: 2rem;
-        }
-
-        .admin-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid #f0f0f0;
-        }
-
-        .admin-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        .admin-actions {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .admin-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .admin-table th,
-        .admin-table td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .admin-table th {
-            background: #f8f9fa;
-            font-weight: 600;
-            color: #333;
-        }
-
-        .admin-table tr:hover {
-            background: #f8f9ff;
-        }
-
-        .product-thumbnail {
-            width: 50px;
-            height: 50px;
-            border-radius: 8px;
-            object-fit: cover;
-            background: #f0f0f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .product-thumbnail i {
-            color: #667eea;
-            font-size: 1.5rem;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .action-buttons .btn {
-            padding: 0.3rem 0.6rem;
-            font-size: 0.8rem;
-        }
-
-        /* Image upload styles */
-        .image-upload {
-            border: 2px dashed #e0e0e0;
-            border-radius: 8px;
-            padding: 2rem;
-            text-align: center;
-            cursor: pointer;
-            transition: border-color 0.3s;
-        }
-
-        .image-upload:hover {
-            border-color: #667eea;
-        }
-
-        .image-upload.dragover {
-            border-color: #667eea;
-            background-color: #f8f9ff;
-        }
-
-        .image-preview {
-            max-width: 200px;
-            max-height: 200px;
-            margin: 1rem auto;
-            border-radius: 8px;
-            display: none;
-        }
-
-        .search-filter {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            align-items: center;
-        }
-
-        .search-input {
-            flex: 1;
-            padding: 0.8rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1rem;
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        /* Responsive Design */
         @media (max-width: 768px) {
-            .products-grid {
+            .services-grid {
                 grid-template-columns: 1fr;
+                gap: 20px;
             }
             
-            .hero h1 {
+            .header h1 {
                 font-size: 2rem;
             }
             
-            .nav-links {
-                gap: 1rem;
-            }
-            
-            .product-actions {
-                flex-direction: column;
-            }
-
-            .admin-table {
-                font-size: 0.8rem;
-            }
-
-            .admin-table th,
-            .admin-table td {
-                padding: 0.5rem;
-            }
-
-            .admin-actions {
-                flex-direction: column;
-            }
-
-            .search-filter {
-                flex-direction: column;
+            .service-button {
+                padding: 25px 15px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav container">
-            <a href="#" class="logo">TechStore</a>
-            <div class="nav-links">
-                <a href="#products">Products</a>
-                <a href="#" onclick="showLogin()">Login</a>
-                <a href="#" onclick="showAdmin()">Admin</a>
-                <button class="cart-icon" onclick="showCart()">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="cart-count">0</span>
-                </button>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="container">
-                <h1>Go Technology Solution Store</h1>
-                <p>Discover cutting-edge technology at unbeatable prices</p>
-            </div>
-        </section>
-
-        <!-- Products Section -->
-        <section class="products-section" id="products">
-            <div class="container">
-                <h2 style="text-align: center; margin-bottom: 2rem; color: #333;">Our Products</h2>
-                <div class="products-grid" id="productsGrid">
-                    <!-- Products will be dynamically loaded here -->
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Login Modal -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('loginModal')">&times;</span>
-            <h2>Sign In</h2>
-            <form id="loginForm">
-                <div class="form-group">
-                    <label for="name">Full Name</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" required>
-                </div>
-                <div class="form-group">
-                    <label for="gender">Gender</label>
-                    <select id="gender" name="gender" required>
-                        <option value="">Select Gender</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
-            </form>
-        </div>
+    <div class="header">
+        <h1>Our Services</h1>
+        <p>Choose from our comprehensive range of technology solutions</p>
     </div>
 
-    <!-- Cart Modal -->
-    <div id="cartModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('cartModal')">&times;</span>
-            <h2>Shopping Cart</h2>
-            <div id="cartItems"></div>
-            <div class="cart-total" id="cartTotal">Total: $0.00</div>
-            <div class="payment-methods">
-                <div class="payment-btn" onclick="selectPayment('mpesa')">
-                    <strong>M-Pesa</strong><br>
-                    <small>Mobile Payment</small>
-                </div>
-                <div class="payment-btn" onclick="selectPayment('nmb')">
-                    <strong>NMB Bank</strong><br>
-                    <small>Bank Transfer</small>
-                </div>
-            </div>
-            <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="checkout()">
-                Proceed to Checkout
-            </button>
-        </div>
-    </div>
+    <div class="services-grid">
+        <button class="service-button" onclick="window.location.href='/pages/cctv.html'">
+            <div class="service-icon">📹</div>
+            <div class="service-title">CCTV Camera</div>
+            <div class="service-description">Professional security camera systems and surveillance solutions</div>
+        </button>
 
-    <!-- Enhanced Admin Modal -->
-    <div id="adminModal" class="modal">
-        <div class="modal-content large">
-            <span class="close" onclick="closeModal('adminModal')">&times;</span>
-            
-            <div class="admin-header">
-                <h2><i class="fas fa-cog"></i> Admin Dashboard</h2>
-                <div class="admin-actions">
-                    <button class="btn btn-success" onclick="showAddProduct()">
-                        <i class="fas fa-plus"></i> Add Product
-                    </button>
-                    <button class="btn btn-warning" onclick="exportData()">
-                        <i class="fas fa-download"></i> Export Data
-                    </button>
-                </div>
-            </div>
+        <button class="service-button" onclick="window.location.href='/pages/networking.html'">
+            <div class="service-icon">🌐</div>
+            <div class="service-title">Networking and Devices</div>
+            <div class="service-description">Network infrastructure, routers, switches, and connectivity solutions</div>
+        </button>
 
-            <!-- Admin Stats -->
-            <div class="admin-stats">
-                <div class="stat-card">
-                    <div class="stat-number" id="totalProducts">0</div>
-                    <div class="stat-label">Total Products</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="totalValue">$0</div>
-                    <div class="stat-label">Total Inventory Value</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="avgPrice">$0</div>
-                    <div class="stat-label">Average Price</div>
-                </div>
-            </div>
+        <button class="service-button" onclick="window.location.href='/pages/PowerBank.html'">
+            <div class="service-icon">🔋</div>
+            <div class="service-title">Power Bank and AirPods</div>
+            <div class="service-description">Portable charging solutions and wireless audio accessories</div>
+        </button>
 
-            <!-- Search and Filter -->
-            <div class="search-filter">
-                <input type="text" class="search-input" id="adminSearch" placeholder="Search products..." onkeyup="filterAdminProducts()">
-                <select id="categoryFilter" onchange="filterAdminProducts()" class="form-group">
-                    <option value="">All Categories</option>
-                    <option value="laptop">Laptops</option>
-                    <option value="monitor">Monitors</option>
-                    <option value="accessories">Accessories</option>
-                </select>
-            </div>
+        <button class="service-button" onclick="window.location.href='/pages/Electrical Fence.html'">
+            <div class="service-icon">⚡</div>
+            <div class="service-title">Electrical Fence</div>
+            <div class="service-description">Perimeter security systems and electric fencing solutions</div>
+        </button>
 
-            <!-- Products Table -->
-            <div style="overflow-x: auto;">
-                <table class="admin-table">
-                    <thead>
-                        <tr>
-                            <th>Image</th>
-                            <th>Product Name</th>
-                            <th>Description</th>
-                            <th>Price</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="adminProductsTable">
-                        <!-- Products will be loaded here -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+        <button class="service-button" onclick="window.location.href='/pages/Computer and Accessories.html'">
+            <div class="service-icon">💻</div>
+            <div class="service-title">Computer and Accessories</div>
+            <div class="service-description">Desktop computers, laptops, and all computer peripherals</div>
+        </button>
 
-    <!-- Enhanced Add/Edit Product Modal -->
-    <div id="addProductModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('addProductModal')">&times;</span>
-            <h2 id="productModalTitle">Add New Product</h2>
-            <form id="addProductForm">
-                <input type="hidden" id="editProductId" value="">
-                
-                <div class="form-group">
-                    <label for="productName">Product Name *</label>
-                    <input type="text" id="productName" name="productName" required placeholder="Enter product name">
-                </div>
-                
-                <div class="form-group">
-                    <label for="productDescription">Description *</label>
-                    <textarea id="productDescription" name="productDescription" rows="4" required placeholder="Enter detailed product description"></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label for="productPrice">Price ($) *</label>
-                    <input type="number" id="productPrice" name="productPrice" step="0.01" min="0" required placeholder="0.00">
-                </div>
-                
-                <div class="form-group">
-                    <label for="productCategory">Category</label>
-                    <select id="productCategory" name="productCategory">
-                        <option value="">Select Category</option>
-                        <option value="laptop">Laptops</option>
-                        <option value="monitor">Monitors</option>
-                        <option value="accessories">Accessories</option>
-                        <option value="storage">Storage</option>
-                        <option value="audio">Audio</option>
-                        <option value="networking">Networking</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="productImage">Product Image</label>
-                    <input type="file" id="productImage" name="productImage" accept="image/*" onchange="previewImage(this)" style="display: none;">
-                    <div class="image-upload" onclick="document.getElementById('productImage').click()">
-                        <i class="fas fa-cloud-upload-alt" style="font-size: 2rem; color: #667eea; margin-bottom: 1rem;"></i>
-                        <p>Click to upload image or drag and drop</p>
-                        <p style="font-size: 0.8rem; color: #666; margin-top: 0.5rem;">Supported formats: JPG, PNG, GIF (Max 5MB)</p>
-                        <img id="imagePreview" class="image-preview" alt="Preview">
-                    </div>
-                </div>
-                
-                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
-                    <button type="button" class="btn btn-danger" onclick="resetForm()" style="flex: 1;">
-                        <i class="fas fa-undo"></i> Reset
-                    </button>
-                    <button type="submit" class="btn btn-primary" style="flex: 2;">
-                        <i class="fas fa-save"></i> <span id="submitBtnText">Add Product</span>
-                    </button>
-                </div>
-            </form>
-        </div>
+        <button class="service-button" onclick="window.location.href='/pages/Printer and Maintenance.html'">
+            <div class="service-icon">🖨️</div>
+            <div class="service-title">Printer and Maintenance</div>
+            <div class="service-description">Printing solutions, repairs, and ongoing maintenance services</div>
+        </button>
+
+        <button class="service-button" onclick="window.location.href='/pages/Access Control.html'">
+            <div class="service-icon">🔐</div>
+            <div class="service-title">Access Control</div>
+            <div class="service-description">Smart locks, card readers, and building access management systems</div>
+        </button>
+
+        <button class="service-button" onclick="window.location.href='/pages/cctv.html'">
+            <div class="service-icon">🔐</div>
+            <div class="service-title">Access Control</div>
+            <div class="service-description">Smart locks, card readers, and building access management systems</div>
+        </button>
+
+        <button class="service-button" onclick="window.location.href='/pages/scctv.html'">
+            <div class="service-icon">🔐</div>
+            <div class="service-title">Access Control</div>
+            <div class="service-description">Smart locks, card readers, and building access management systems</div>
+        </button>
     </div>
 
     <script>
-        // Global variables
-        let products = [
-            { id: 1, name: "HP Laptop", description: "HP Pavilion 15 - Intel i5 2.4GHz, 8GB RAM, 500GB SSD", price: 2000000, category: "laptop", image: "./images/images(1)" },
-            { id: 2, name: "Dell Monitor", description: "Dell 24\" Full HD Monitor - 1920x1080, IPS Panel", price: 299.99, category: "monitor", image: "./images/dell-monitor.jpg" },
-            { id: 3, name: "Logitech Mouse", description: "Wireless Optical Mouse - 1000 DPI, Ergonomic Design", price: 29.99, category: "accessories", image: "./images/logitech-mouse.jpg" },
-            { id: 4, name: "Mechanical Keyboard", description: "RGB Backlit Gaming Keyboard - Cherry MX Switches", price: 149.99, category: "accessories", image: "./images/mechanical-keyboard.jpg" },
-            { id: 5, name: "Samsung SSD", description: "1TB NVMe SSD - 3500MB/s Read Speed", price: 179.99, category: "storage", image: "./images/samsung-ssd.jpg" },
-            { id: 6, name: "Webcam HD", description: "1080p Full HD Webcam - Auto Focus, Built-in Microphone", price: 79.99, category: "accessories", image: "./images/webcam-hd.jpg" },
-            { id: 7, name: "Bluetooth Speaker", description: "Portable Speaker - 20W, 12-hour Battery Life", price: 89.99, category: "audio", image: "./images/bluetooth-speaker.jpg" },
-            { id: 8, name: "Gaming Mouse Pad", description: "Extended Gaming Mouse Pad - 36x12 inches", price: 19.99, category: "accessories", image: "./images/gaming-mousepad.jpg" },
-            { id: 9, name: "USB-C Hub", description: "7-in-1 USB-C Hub - HDMI, USB 3.0, SD Card Reader", price: 59.99, category: "accessories", image: "./images/usb-c-hub.jpg" },
-            { id: 10, name: "Wireless Headphones", description: "Bluetooth 5.0 Headphones - Noise Cancelling", price: 199.99, category: "audio", image: "./images/wireless-headphones.jpg" },
-            { id: 11, name: "Tablet Stand", description: "Adjustable Aluminum Stand - Compatible with 7-13\" tablets", price: 34.99, category: "accessories", image: "./images/tablet-stand.jpg" },
-            { id: 12, name: "Power Bank", description: "20000mAh Portable Charger - Fast Charging, LED Display", price: 49.99, category: "accessories", image: "./images/power-bank.jpg" },
-            { id: 13, name: "LED Desk Lamp", description: "USB Rechargeable LED Lamp - 3 Brightness Levels", price: 39.99, category: "accessories", image: "./images/led-desk-lamp.jpg" },
-            { id: 14, name: "Graphics Card", description: "NVIDIA RTX 3070 - 8GB GDDR6, Ray Tracing Support", price: 699.99, category: "accessories", image: "./images/graphics-card.jpg" },
-            { id: 15, name: "External Hard Drive", description: "2TB USB 3.0 External Drive - Portable, Backup Software", price: 119.99, category: "storage", image: "./images/external-hdd.jpg" },
-            { id: 16, name: "Wireless Router", description: "WiFi 6 Router - AC1750, Dual Band, 4 Gigabit Ports", price: 129.99, category: "networking", image: "./images/wireless-router.jpg" },
-            { id: 17, name: "Smart Watch", description: "Fitness Tracker - Heart Rate Monitor, GPS, Waterproof", price: 249.99, category: "accessories", image: "./images/smart-watch.jpg" },
-            { id: 18, name: "Bluetooth Earbuds", description: "True Wireless Earbuds - 24-hour Battery, Touch Control", price: 129.99, category: "audio", image: "./images/bluetooth-earbuds.jpg" },
-            { id: 19, name: "Laptop Cooling Pad", description: "Cooling Pad with 6 Fans - RGB Lighting, Adjustable Height", price: 44.99, category: "accessories", image: "./images/laptop-cooling-pad.jpg" },
-            { id: 20, name: "Printer", description: "All-in-One Inkjet Printer - Print, Scan, Copy, WiFi", price: 189.99, category: "accessories", image: "./images/printer.jpg" }
-        ];
+        function navigateToPage(service) {
+            // In a real implementation, you would navigate to actual pages
+            // For this demo, we'll show an alert with the navigation intent
+            
+            const servicePages = {
+                'cctv': 'cctv-cameras.html',
+                'networking': 'networking-devices.html',
+                'powerbank': 'powerbank-airpods.html',
+                'electrical-fence': 'electrical-fence.html',
+                'computers': 'computer-accessories.html',
+                'printers': 'printer-maintenance.html',
+                'access-control': 'access-control.html'
+            };
 
-        let cart = [];
-        let currentUser = null;
-        let selectedPayment = null;
-        let editingProductId = null;
+            const serviceTitles = {
+                'cctv': 'CCTV Camera Systems',
+                'networking': 'Networking and Devices',
+                'powerbank': 'Power Bank and AirPods',
+                'electrical-fence': 'Electrical Fence Systems',
+                'computers': 'Computer and Accessories',
+                'printers': 'Printer and Maintenance',
+                'access-control': 'Access Control Systems'
+            };
 
-        // Initialize the application
+            // For demo purposes, show alert
+            alert(`Navigating to: ${serviceTitles[service]}\nPage: ${servicePages[service]}\n\nIn a real website, this would redirect to the ${serviceTitles[service]} page.`);
+            
+            // Uncomment the line below for actual navigation:
+            // window.location.href = servicePages[service];
+        }
+
+        // Add some interactive effects
         document.addEventListener('DOMContentLoaded', function() {
-            loadProducts();
-            updateCartCount();
+            const buttons = document.querySelectorAll('.service-button');
+            
+            buttons.forEach((button, index) => {
+                // Stagger the initial animation
+                button.style.opacity = '0';
+                button.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    button.style.transition = 'all 0.6s ease';
+                    button.style.opacity = '1';
+                    button.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
         });
-
-        // Load products into the grid
-        function loadProducts() {
-            const productsGrid = document.getElementById('productsGrid');
-            productsGrid.innerHTML = '';
-
-            products.forEach(product => {
-                const productCard = createProductCard(product);
-                productsGrid.appendChild(productCard);
-            });
-        }
-
-        // Create a product card element
-        function createProductCard(product) {
-            const card = document.createElement('div');
-            card.className = 'product-card';
-            
-            // Create image content with fallback
-            const imageContent = product.image 
-                ? `<img src="${product.image}" alt="${product.name}" onerror="handleImageError(this)">`
-                : `<i class="fallback-icon ${product.icon || 'fas fa-box'}"></i>`;
-            
-            card.innerHTML = `
-                <div class="product-image">
-                    ${imageContent}
-                </div>
-                <div class="product-info">
-                    <h3 class="product-title">${product.name}</h3>
-                    <p class="product-description">${product.description}</p>
-                    <div class="product-price">${product.price.toFixed(2)}</div>
-                    <div class="product-actions">
-                        <button class="btn btn-success" onclick="addToCart(${product.id})">
-                            <i class="fas fa-cart-plus"></i> Add to Cart
-                        </button>
-                    </div>
-                    <div class="social-buttons">
-                        <a href="https://wa.me/1234567890?text=Hi, I'm interested in ${encodeURIComponent(product.name)}" 
-                           class="btn btn-social btn-whatsapp" target="_blank">
-                            <i class="fab fa-whatsapp"></i> WhatsApp
-                        </a>
-                        <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}" 
-                           class="btn btn-social btn-facebook" target="_blank">
-                            <i class="fab fa-facebook"></i> Facebook
-                        </a>
-                        <a href="https://www.instagram.com/" 
-                           class="btn btn-social btn-instagram" target="_blank">
-                            <i class="fab fa-instagram"></i> Instagram
-                        </a>
-                    </div>
-                </div>
-            `;
-            return card;
-        }
-
-        // Handle image loading errors
-        function handleImageError(img) {
-            const productDiv = img.parentElement;
-            productDiv.innerHTML = '<i class="fallback-icon fas fa-box"></i>';
-        }
-
-        // Preview uploaded image
-        function previewImage(input) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const preview = document.getElementById('imagePreview');
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        // Add product to cart
-        function addToCart(productId) {
-            const product = products.find(p => p.id === productId);
-            if (product) {
-                const existingItem = cart.find(item => item.id === productId);
-                if (existingItem) {
-                    existingItem.quantity += 1;
-                } else {
-                    cart.push({ ...product, quantity: 1 });
-                }
-                updateCartCount();
-                showNotification('Product added to cart!');
-            }
-        }
-
-        // Update cart count
-        function updateCartCount() {
-            const cartCount = document.querySelector('.cart-count');
-            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            cartCount.textContent = totalItems;
-        }
-
-        // Show notification
-        function showNotification(message, type = 'success') {
-            const notification = document.createElement('div');
-            const bgColor = type === 'success' ? '#2ed573' : type === 'error' ? '#ff4757' : '#667eea';
-            notification.style.cssText = `
-                position: fixed;
-                top: 100px;
-                right: 20px;
-                background: ${bgColor};
-                color: white;
-                padding: 1rem 1.5rem;
-                border-radius: 8px;
-                z-index: 3000;
-                animation: slideIn 0.3s ease-out;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            `;
-            notification.textContent = message;
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.remove();
-            }, 3000);
-        }
-
-        // Modal functions
-        function showLogin() {
-            document.getElementById('loginModal').style.display = 'block';
-        }
-
-        function showCart() {
-            updateCartDisplay();
-            document.getElementById('cartModal').style.display = 'block';
-        }
-
-        function showAdmin() {
-            loadAdminProducts();
-            updateAdminStats();
-            document.getElementById('adminModal').style.display = 'block';
-        }
-
-        function showAddProduct() {
-            resetForm();
-            document.getElementById('productModalTitle').textContent = 'Add New Product';
-            document.getElementById('submitBtnText').textContent = 'Add Product';
-            document.getElementById('addProductModal').style.display = 'block';
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
-
-        // Update cart display
-        function updateCartDisplay() {
-            const cartItems = document.getElementById('cartItems');
-            const cartTotal = document.getElementById('cartTotal');
-            
-            if (cart.length === 0) {
-                cartItems.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">Your cart is empty</p>';
-                cartTotal.textContent = 'Total: $0.00';
-                return;
-            }
-
-            cartItems.innerHTML = '';
-            let total = 0;
-
-            cart.forEach(item => {
-                const cartItem = document.createElement('div');
-                cartItem.className = 'cart-item';
-                cartItem.innerHTML = `
-                    <div>
-                        <strong>${item.name}</strong><br>
-                        <small>${item.price.toFixed(2)} x ${item.quantity}</small>
-                    </div>
-                    <div>
-                        <button class="btn btn-danger" onclick="removeFromCart(${item.id})" style="padding: 0.3rem 0.6rem;">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                `;
-                cartItems.appendChild(cartItem);
-                total += item.price * item.quantity;
-            });
-
-            cartTotal.textContent = `Total: ${total.toFixed(2)}`;
-        }
-
-        // Remove from cart
-        function removeFromCart(productId) {
-            cart = cart.filter(item => item.id !== productId);
-            updateCartCount();
-            updateCartDisplay();
-            showNotification('Product removed from cart');
-        }
-
-        // Payment selection
-        function selectPayment(method) {
-            selectedPayment = method;
-            document.querySelectorAll('.payment-btn').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-            event.target.closest('.payment-btn').classList.add('selected');
-        }
-
-        // Checkout
-        function checkout() {
-            if (!currentUser) {
-                alert('Please sign in first');
-                closeModal('cartModal');
-                showLogin();
-                return;
-            }
-
-            if (!selectedPayment) {
-                alert('Please select a payment method');
-                return;
-            }
-
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            
-            if (selectedPayment === 'mpesa') {
-                alert(`M-Pesa payment of ${total.toFixed(2)} initiated. You will receive an SMS shortly.`);
-            } else if (selectedPayment === 'nmb') {
-                alert(`NMB Bank transfer of ${total.toFixed(2)} initiated. Please complete the payment using your banking app.`);
-            }
-
-            // Clear cart after checkout
-            cart = [];
-            updateCartCount();
-            closeModal('cartModal');
-            showNotification('Order placed successfully!');
-        }
-
-        // Enhanced Admin Functions
-        function updateAdminStats() {
-            const totalProducts = products.length;
-            const totalValue = products.reduce((sum, product) => sum + product.price, 0);
-            const avgPrice = totalValue / totalProducts || 0;
-
-            document.getElementById('totalProducts').textContent = totalProducts;
-            document.getElementById('totalValue').textContent = `${totalValue.toFixed(2)}`;
-            document.getElementById('avgPrice').textContent = `${avgPrice.toFixed(2)}`;
-        }
-
-        function loadAdminProducts() {
-            const adminTable = document.getElementById('adminProductsTable');
-            adminTable.innerHTML = '';
-
-            products.forEach(product => {
-                const row = document.createElement('tr');
-                
-                // Create image cell
-                const imageCell = document.createElement('td');
-                if (product.image) {
-                    const img = document.createElement('img');
-                    img.src = product.image;
-                    img.className = 'product-thumbnail';
-                    img.onerror = function() {
-                        this.outerHTML = '<div class="product-thumbnail"><i class="fas fa-box"></i></div>';
-                    };
-                    imageCell.appendChild(img);
-                } else {
-                    imageCell.innerHTML = '<div class="product-thumbnail"><i class="fas fa-box"></i></div>';
-                }
-                
-                row.appendChild(imageCell);
-
-                // Product details
-                row.innerHTML += `
-                    <td><strong>${product.name}</strong></td>
-                    <td style="max-width: 300px; word-wrap: break-word;">${product.description}</td>
-                    <td><strong>${product.price.toFixed(2)}</strong></td>
-                    <td>
-                        <div class="action-buttons">
-                            <button class="btn btn-warning" onclick="editProduct(${product.id})">
-                                <i class="fas fa-edit"></i> Edit
-                            </button>
-                            <button class="btn btn-danger" onclick="deleteProduct(${product.id})">
-                                <i class="fas fa-trash"></i> Delete
-                            </button>
-                        </div>
-                    </td>
-                `;
-                
-                adminTable.appendChild(row);
-            });
-        }
-
-        function filterAdminProducts() {
-            const searchTerm = document.getElementById('adminSearch').value.toLowerCase();
-            const categoryFilter = document.getElementById('categoryFilter').value;
-            
-            const rows = document.querySelectorAll('#adminProductsTable tr');
-            
-            rows.forEach(row => {
-                const productName = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
-                const productDesc = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
-                const product = products.find(p => p.name.toLowerCase() === productName);
-                
-                const matchesSearch = productName.includes(searchTerm) || productDesc.includes(searchTerm);
-                const matchesCategory = !categoryFilter || (product && product.category === categoryFilter);
-                
-                row.style.display = matchesSearch && matchesCategory ? '' : 'none';
-            });
-        }
-
-        function editProduct(productId) {
-            const product = products.find(p => p.id === productId);
-            if (!product) return;
-
-            editingProductId = productId;
-            
-            // Fill form with existing data
-            document.getElementById('productName').value = product.name;
-            document.getElementById('productDescription').value = product.description;
-            document.getElementById('productPrice').value = product.price;
-            document.getElementById('productCategory').value = product.category || '';
-            document.getElementById('editProductId').value = productId;
-            
-            // Show existing image if available
-            if (product.image) {
-                const preview = document.getElementById('imagePreview');
-                preview.src = product.image;
-                preview.style.display = 'block';
-            }
-            
-            // Update modal title and button
-            document.getElementById('productModalTitle').textContent = 'Edit Product';
-            document.getElementById('submitBtnText').textContent = 'Update Product';
-            
-            document.getElementById('addProductModal').style.display = 'block';
-        }
-
-        function deleteProduct(productId) {
-            const product = products.find(p => p.id === productId);
-            if (!product) return;
-
-            if (confirm(`Are you sure you want to delete "${product.name}"? This action cannot be undone.`)) {
-                products = products.filter(p => p.id !== productId);
-                loadProducts();
-                loadAdminProducts();
-                updateAdminStats();
-                showNotification('Product deleted successfully!');
-            }
-        }
-
-        function resetForm() {
-            document.getElementById('addProductForm').reset();
-            document.getElementById('editProductId').value = '';
-            document.getElementById('imagePreview').style.display = 'none';
-            editingProductId = null;
-        }
-
-        // Login form submission
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const userData = {
-                name: formData.get('name'),
-                email: formData.get('email'),
-                phone: formData.get('phone'),
-                gender: formData.get('gender')
-            };
-
-            currentUser = userData;
-            
-            // Simulate sending email to admin
-            console.log('User data sent to yusuphlameck220@gmail.com:', userData);
-            
-            closeModal('loginModal');
-            showNotification('Successfully signed in!');
-        });
-
-        // Enhanced Add/Edit product form submission
-        document.getElementById('addProductForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const imageFile = formData.get('productImage');
-            const editId = document.getElementById('editProductId').value;
-            
-            // Handle image
-            let imageUrl = null;
-            if (imageFile && imageFile.size > 0) {
-                // Check file size (5MB limit)
-                if (imageFile.size > 5 * 1024 * 1024) {
-                    showNotification('Image size must be less than 5MB', 'error');
-                    return;
-                }
-                imageUrl = URL.createObjectURL(imageFile);
-            } else if (editId) {
-                // Keep existing image if editing and no new image uploaded
-                const existingProduct = products.find(p => p.id === parseInt(editId));
-                imageUrl = existingProduct ? existingProduct.image : null;
-            }
-            
-            const productData = {
-                name: formData.get('productName'),
-                description: formData.get('productDescription'),
-                price: parseFloat(formData.get('productPrice')),
-                category: formData.get('productCategory'),
-                image: imageUrl
-            };
-
-            if (editId) {
-                // Update existing product
-                const productIndex = products.findIndex(p => p.id === parseInt(editId));
-                if (productIndex !== -1) {
-                    products[productIndex] = { ...products[productIndex], ...productData };
-                    showNotification('Product updated successfully!');
-                }
-            } else {
-                // Add new product
-                const newProduct = {
-                    id: Date.now(),
-                    ...productData
-                };
-                products.push(newProduct);
-                showNotification('Product added successfully!');
-            }
-
-            loadProducts();
-            loadAdminProducts();
-            updateAdminStats();
-            closeModal('addProductModal');
-            resetForm();
-        });
-
-        // Export data
-        function exportData() {
-            const data = {
-                products: products,
-                users: currentUser ? [currentUser] : [],
-                stats: {
-                    totalProducts: products.length,
-                    totalValue: products.reduce((sum, p) => sum + p.price, 0),
-                    avgPrice: products.reduce((sum, p) => sum + p.price, 0) / products.length || 0
-                },
-                exportDate: new Date().toISOString()
-            };
-            
-            const dataStr = JSON.stringify(data, null, 2);
-            const dataBlob = new Blob([dataStr], {type: 'application/json'});
-            const url = URL.createObjectURL(dataBlob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = `techstore_data_${new Date().toISOString().split('T')[0]}.json`;
-            link.click();
-            URL.revokeObjectURL(url);
-            showNotification('Data exported successfully!');
-        }
-
-        // Drag and drop functionality for image upload
-        const imageUpload = document.querySelector('.image-upload');
-        if (imageUpload) {
-            imageUpload.addEventListener('dragover', function(e) {
-                e.preventDefault();
-                this.classList.add('dragover');
-            });
-
-            imageUpload.addEventListener('dragleave', function(e) {
-                e.preventDefault();
-                this.classList.remove('dragover');
-            });
-
-            imageUpload.addEventListener('drop', function(e) {
-                e.preventDefault();
-                this.classList.remove('dragover');
-                
-                const files = e.dataTransfer.files;
-                if (files.length > 0 && files[0].type.startsWith('image/')) {
-                    const fileInput = document.getElementById('productImage');
-                    fileInput.files = files;
-                    previewImage(fileInput);
-                }
-            });
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modals = document.querySelectorAll('.modal');
-            modals.forEach(modal => {
-                if (event.target === modal) {
-                    modal.style.display = 'none';
-                }
-            });
-        }
-
-        // Add CSS animation for slide in notification
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideIn {
-                from {
-                    transform: translateX(100%);
-                    opacity: 0;
-                }
-                to {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>
