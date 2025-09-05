@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Services</title>
+    <title>Security Services with Product Dropdowns</title>
     <style>
         * {
             margin: 0;
@@ -15,219 +15,801 @@
             font-family: 'Arial', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             padding: 20px;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            color: white;
-        }
-
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
         }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
             max-width: 1200px;
-            width: 100%;
+            margin: 0 auto;
+        }
+
+        .service-container {
+            position: relative;
         }
 
         .service-button {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
             border: none;
-            border-radius: 15px;
-            padding: 30px 20px;
+            border-radius: 20px;
+            padding: 30px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-button:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
             width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .service-button:hover:before {
-            left: 100%;
         }
 
         .service-button:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
         }
 
         .service-icon {
             font-size: 3rem;
             margin-bottom: 15px;
-            color: #667eea;
         }
 
         .service-title {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             font-weight: bold;
             color: #333;
             margin-bottom: 10px;
         }
 
         .service-description {
-            font-size: 0.95rem;
             color: #666;
-            line-height: 1.4;
+            line-height: 1.6;
+        }
+
+        /* Dropdown Styles */
+        .service-dropdown {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .service-dropdown.active {
+            max-height: 2000px;
+        }
+
+        .dropdown-header {
+            text-align: center;
+            padding: 30px 20px 20px;
+            color: white;
+            border-radius: 15px 15px 0 0;
+            position: relative;
+        }
+
+        .dropdown-header.cctv-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .dropdown-header.alarm-header {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+        }
+
+        .dropdown-header.access-header {
+            background: linear-gradient(135deg, #26de81 0%, #20bf6b 100%);
+        }
+
+        .dropdown-header.computer-header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .dropdown-header.printer-header {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .dropdown-header h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .product-price {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .product-description {
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .whatsapp-btn {
+            background: linear-gradient(45deg, #25D366, #128C7E);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .whatsapp-btn:hover {
+            background: linear-gradient(45deg, #128C7E, #25D366);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .whatsapp-icon {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 1rem;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
         }
 
         @media (max-width: 768px) {
             .services-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
             }
             
-            .header h1 {
-                font-size: 2rem;
+            .products-grid {
+                grid-template-columns: 1fr;
+                padding: 15px;
             }
             
-            .service-button {
-                padding: 25px 15px;
+            .dropdown-header h2 {
+                font-size: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Our Services</h1>
-        <p>Choose from our comprehensive range of technology solutions</p>
-    </div>
-
     <div class="services-grid">
-        <button class="service-button" onclick="window.location.href='/pages/cctv.html'">
-            <div class="service-icon">📹</div>
-            <div class="service-title">CCTV Camera</div>
-            <div class="service-description">Professional security camera systems and surveillance solutions</div>
-        </button>
+        <!-- CCTV Camera Service -->
+        <div class="service-container">
+            <button class="service-button" onclick="toggleDropdown('cctv')">
+                <div class="service-icon">📹</div>
+                <div class="service-title">CCTV Camera</div>
+                <div class="service-description">Professional security camera systems and surveillance solutions</div>
+            </button>
+            
+            <div class="service-dropdown" id="cctvDropdown">
+                <div class="dropdown-header cctv-header">
+                    <button class="close-btn" onclick="toggleDropdown('cctv')">×</button>
+                    <h2>📹 CCTV Products</h2>
+                    <p>Discover amazing CCTV products and chat with us on WhatsApp!</p>
+                </div>
+                <div class="products-grid" id="cctvProductsGrid">
+                    <!-- CCTV Products will be loaded here -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Access Control Service -->
+        <div class="service-container">
+            <button class="service-button" onclick="toggleDropdown('access')">
+                <div class="service-icon">🔒</div>
+                <div class="service-title">Access Control</div>
+                <div class="service-description">Smart locks and access management systems</div>
+            </button>
+            
+            <div class="service-dropdown" id="accessDropdown">
+                <div class="dropdown-header access-header">
+                    <button class="close-btn" onclick="toggleDropdown('access')">×</button>
+                    <h2>🔒 Access Control Products</h2>
+                    <p>Secure your premises with advanced access control systems!</p>
+                </div>
+                <div class="products-grid" id="accessProductsGrid">
+                    <!-- Access Control Products will be loaded here -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Alarm Systems Service -->
+        <div class="service-container">
+            <button class="service-button" onclick="toggleDropdown('alarm')">
+                <div class="service-icon">🚨</div>
+                <div class="service-title">Alarm Systems</div>
+                <div class="service-description">Advanced security alarm and monitoring solutions</div>
+            </button>
+            
+            <div class="service-dropdown" id="alarmDropdown">
+                <div class="dropdown-header alarm-header">
+                    <button class="close-btn" onclick="toggleDropdown('alarm')">×</button>
+                    <h2>🚨 Security Alarm Products</h2>
+                    <p>Protect your property with state-of-the-art alarm systems!</p>
+                </div>
+                <div class="products-grid" id="alarmProductsGrid">
+                    <!-- Alarm Products will be loaded here -->
+                </div>
+            </div>
+        </div>
 
-        <button class="service-button" onclick="window.location.href='/pages/networking.html'">
-            <div class="service-icon">🌐</div>
-            <div class="service-title">Networking and Devices</div>
-            <div class="service-description">Network infrastructure, routers, switches, and connectivity solutions</div>
-        </button>
+        <!-- Computer & Accessories Service -->
+        <div class="service-container">
+            <button class="service-button" onclick="toggleDropdown('computer')">
+                <div class="service-icon">💻</div>
+                <div class="service-title">Computer & Accessories</div>
+                <div class="service-description">Computers, laptops, tablets and all accessories</div>
+            </button>
+            
+            <div class="service-dropdown" id="computerDropdown">
+                <div class="dropdown-header computer-header">
+                    <button class="close-btn" onclick="toggleDropdown('computer')">×</button>
+                    <h2>💻 Computer Products</h2>
+                    <p>Find the perfect computer equipment for your needs!</p>
+                </div>
+                <div class="products-grid" id="computerProductsGrid">
+                    <!-- Computer Products will be loaded here -->
+                </div>
+            </div>
+        </div>
 
-        <button class="service-button" onclick="window.location.href='/pages/PowerBank.html'">
-            <div class="service-icon">🔋</div>
-            <div class="service-title">Power Bank and AirPods</div>
-            <div class="service-description">Portable charging solutions and wireless audio accessories</div>
-        </button>
-
-        <button class="service-button" onclick="window.location.href='/pages/Electrical Fence.html'">
-            <div class="service-icon">⚡</div>
-            <div class="service-title">Electrical Fence</div>
-            <div class="service-description">Perimeter security systems and electric fencing solutions</div>
-        </button>
-
-        <button class="service-button" onclick="window.location.href='/pages/Computer and Accessories.html'">
-            <div class="service-icon">💻</div>
-            <div class="service-title">Computer and Accessories</div>
-            <div class="service-description">Desktop computers, laptops, and all computer peripherals</div>
-        </button>
-
-        <button class="service-button" onclick="window.location.href='/pages/Printer and Maintenance.html'">
-            <div class="service-icon">🖨️</div>
-            <div class="service-title">Printer and Maintenance</div>
-            <div class="service-description">Printing solutions, repairs, and ongoing maintenance services</div>
-        </button>
-
-        <button class="service-button" onclick="window.location.href='/pages/Access Control.html'">
-            <div class="service-icon">🔐</div>
-            <div class="service-title">Access Control</div>
-            <div class="service-description">Smart locks, card readers, and building access management systems</div>
-        </button>
-
-        <button class="service-button" onclick="window.location.href='/pages/cctv.html'">
-            <div class="service-icon">🔐</div>
-            <div class="service-title">Access Control</div>
-            <div class="service-description">Smart locks, card readers, and building access management systems</div>
-        </button>
-
-        <button class="service-button" onclick="window.location.href='/pages/scctv.html'">
-            <div class="service-icon">🔐</div>
-            <div class="service-title">Access Control</div>
-            <div class="service-description">Smart locks, card readers, and building access management systems</div>
-        </button>
+        <!-- Printer & Office Supply Service -->
+        <div class="service-container">
+            <button class="service-button" onclick="toggleDropdown('printer')">
+                <div class="service-icon">🖨️</div>
+                <div class="service-title">Printer & Office Supply</div>
+                <div class="service-description">Printers, scanners and complete office supplies</div>
+            </button>
+            
+            <div class="service-dropdown" id="printerDropdown">
+                <div class="dropdown-header printer-header">
+                    <button class="close-btn" onclick="toggleDropdown('printer')">×</button>
+                    <h2>🖨️ Office Equipment</h2>
+                    <p>Complete your office setup with professional equipment!</p>
+                </div>
+                <div class="products-grid" id="printerProductsGrid">
+                    <!-- Printer Products will be loaded here -->
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        function navigateToPage(service) {
-            // In a real implementation, you would navigate to actual pages
-            // For this demo, we'll show an alert with the navigation intent
-            
-            const servicePages = {
-                'cctv': 'cctv-cameras.html',
-                'networking': 'networking-devices.html',
-                'powerbank': 'powerbank-airpods.html',
-                'electrical-fence': 'electrical-fence.html',
-                'computers': 'computer-accessories.html',
-                'printers': 'printer-maintenance.html',
-                'access-control': 'access-control.html'
-            };
+        // CCTV Products Data
+        const cctvProducts = [
+            {
+                id: 1,
+                title: "Full Set 4 Camera",
+                price: "TSh 450,000 Kufungiwa 150,000",
+                description: "Camera nne(4) + DVR 8ch + HDD 1TB + BNC 10(pcs) + PowerPin 5(pcs) + Coaxial Cable 100M .",
+                image: "images/fullkit.png"
+            },
+            {
+                id: 2,
+                title: "Indoor camera (camera ya ndani)",
+                price: "TSh 50,000",
+                description: "Perfect for indoor surveillance and monitoring.",
+                image: "images/Aindour.png"
+            },
+            {
+                id: 3,
+                title: "Outdoor camera (camera ya nje)",
+                price: "TSh 50,000",
+                description: "Ina uwezo wa kuona mita 100.",
+                image: "images/analogoutdor.png"
+            },
+            {
+                id: 4,
+                title: "Coaxial cable",
+                price: "TSh 100,000",
+                description: "Wire imara unaopitisha picha pamoja na power mita mia(100).",
+                image: "images/coaxial.png"
+            },
+            {
+                id: 5,
+                title: "Cat6 cable (ethernet)",
+                price: "TSh 100,000",
+                description: "Wire imara wa internet mita mia(100).",
+                image: "images/cat6.png"
+            },
+            {
+                id: 6,
+                title: "RJ45",
+                price: "TSh 500",
+                description: "Portable for easy installation.",
+                image: "images/rj45.jpg"
+            },
+            {
+                id: 7,
+                title: "DVR 4channel",
+                price: "TSh 150,000",
+                description: "Inapokea camera nne(4) tu pia inaruhusu internet pamoja kuunganisha simu na camera.",
+                image: "images/DVR11 4CH.webp"
+            },
+            {
+                id: 8,
+                title: "DVR 8channel",
+                price: "TSh 180,000",
+                description: "Inapokea camera nane(8) tu pia inaruhusu internet na kuunganisha camera na simu.",
+                image: "images/DVR11 8CH.webp"
+            },
+            {
+                id: 9,
+                title: "Power supply 4ch 12v",
+                price: "TSh 110,000",
+                description: "Inatoa umeme wa 12volt kwa camera nne(4).",
+                image: "images/POWERSUPPLY.png"
+            },
+            {
+                id: 10,
+                title: "Power Backup",
+                price: "TSh 180,000",
+                description: "Inatunza umeme kwa ajili ya camera endapo umeme umekatika.",
+                image: "images/PowerBackup.jpg"
+            },
+            {
+                id: 11,
+                title: "Power supply 8ch",
+                price: "TSh 125,000",
+                description: "Inatoa umeme wa 12volt kwa camera nane(8).",
+                image: "images/POWERSPPLY.jpg"
+            },
+            {
+                id: 12,
+                title: "WiFi Router",
+                price: "TSh 90,000",
+                description: "Ina speed ya 300Mbps kwa 250mita na inatoa internet kwa watumia 32.",
+                image: "images/Router.png"
+            }
+        ];
 
-            const serviceTitles = {
-                'cctv': 'CCTV Camera Systems',
-                'networking': 'Networking and Devices',
-                'powerbank': 'Power Bank and AirPods',
-                'electrical-fence': 'Electrical Fence Systems',
-                'computers': 'Computer and Accessories',
-                'printers': 'Printer and Maintenance',
-                'access-control': 'Access Control Systems'
-            };
+        // Access Control Products Data
+        const accessProducts = [
+            {
+                id: 1,
+                title: "Biometric Fingerprint Scanner",
+                price: "TSh 350,000",
+                description: "Advanced fingerprint recognition system with 1000 user capacity and backup key access.",
+                image: "images/fingerprint.jpg"
+            },
+            {
+                id: 2,
+                title: "RFID Card Reader System",
+                price: "TSh 180,000",
+                description: "Contactless card access system with 500 card capacity and admin software included.",
+                image: "images/rfid-reader.jpg"
+            },
+            {
+                id: 3,
+                title: "Smart Digital Door Lock",
+                price: "TSh 280,000",
+                description: "Bluetooth and password enabled smart lock with mobile app control and backup keys.",
+                image: "images/smart-lock.jpg"
+            },
+            {
+                id: 4,
+                title: "Access Control Keypad",
+                price: "TSh 120,000",
+                description: "Weather-resistant keypad with 4-digit PIN codes and relay output for door strikes.",
+                image: "images/keypad.jpg"
+            },
+            {
+                id: 5,
+                title: "Magnetic Door Lock",
+                price: "TSh 80,000",
+                description: "Electromagnetic lock with 600kg holding force, suitable for glass and wooden doors.",
+                image: "images/mag-lock.jpg"
+            },
+            {
+                id: 6,
+                title: "Exit Button (Push to Exit)",
+                price: "TSh 15,000",
+                description: "Stainless steel exit button for releasing electromagnetic locks from inside.",
+                image: "images/exit-button.jpg"
+            },
+            {
+                id: 7,
+                title: "Proximity Cards (10 pieces)",
+                price: "TSh 25,000",
+                description: "125KHz RFID proximity cards compatible with most access control systems.",
+                image: "images/prox-cards.jpg"
+            },
+            {
+                id: 8,
+                title: "Door Strike Electric Lock",
+                price: "TSh 95,000",
+                description: "Fail-secure electric strike for wooden and metal door frames with adjustable latch.",
+                image: "images/door-strike.jpg"
+            }
+        ];
 
-            // For demo purposes, show alert
-            alert(`Navigating to: ${serviceTitles[service]}\nPage: ${servicePages[service]}\n\nIn a real website, this would redirect to the ${serviceTitles[service]} page.`);
+        // Alarm System Products Data
+        const alarmProducts = [
+            {
+                id: 1,
+                title: "Wireless Alarm System Kit",
+                price: "TSh 280,000",
+                description: "Complete wireless alarm system with main panel, 4 door sensors, 2 motion detectors, and remote controls.",
+                image: "images/wireless-alarm-kit.jpg"
+            },
+            {
+                id: 2,
+                title: "Motion Detector Sensor",
+                price: "TSh 45,000",
+                description: "PIR motion sensor with 12m detection range and pet immunity up to 25kg.",
+                image: "images/motion-sensor.jpg"
+            },
+            {
+                id: 3,
+                title: "Door/Window Magnetic Sensor",
+                price: "TSh 25,000",
+                description: "Wireless magnetic contact sensor for doors and windows with tamper detection.",
+                image: "images/door-sensor.jpg"
+            },
+            {
+                id: 4,
+                title: "GSM Alarm Communicator",
+                price: "TSh 120,000",
+                description: "GSM module for sending SMS alerts and calls when alarm is triggered, supports Airtel/Vodacom/Tigo.",
+                image: "images/gsm-module.jpg"
+            },
+            {
+                id: 5,
+                title: "Outdoor Siren with Strobe",
+                price: "TSh 65,000",
+                description: "Weather-proof siren with flashing LED strobe light, 120dB sound output.",
+                image: "images/outdoor-siren.jpg"
+            },
+            {
+                id: 6,
+                title: "Indoor Siren",
+                price: "TSh 35,000",
+                description: "Compact indoor siren with 110dB output and backup battery support.",
+                image: "images/indoor-siren.jpg"
+            },
+            {
+                id: 7,
+                title: "Smoke Detector",
+                price: "TSh 55,000",
+                description: "Photoelectric smoke detector with 85dB built-in alarm and wireless connectivity.",
+                image: "images/smoke-detector.jpg"
+            },
+            {
+                id: 8,
+                title: "Panic Button Remote",
+                price: "TSh 40,000",
+                description: "Wireless panic button with keychain design for emergency activation.",
+                image: "images/panic-button.jpg"
+            },
+            {
+                id: 9,
+                title: "Glass Break Detector",
+                price: "TSh 70,000",
+                description: "Acoustic glass break sensor with 7.6m detection radius for window protection.",
+                image: "images/glass-break.jpg"
+            },
+            {
+                id: 10,
+                title: "Backup Battery 12V 7Ah",
+                price: "TSh 85,000",
+                description: "Rechargeable lead-acid battery for alarm system backup power during outages.",
+                image: "images/backup-battery.jpg"
+            }
+        ];
+
+        // Computer & Accessories Products Data
+        const computerProducts = [
+            {
+                id: 1,
+                title: "Dell Latitude 5520 Laptop",
+                price: "TSh 1,200,000",
+                description: "Intel Core i5, 8GB RAM, 256GB SSD, 15.6\" Display, Windows 11 Professional.",
+                image: "images/dell-laptop.jpg"
+            },
+            {
+                id: 2,
+                title: "HP Desktop Computer",
+                price: "TSh 850,000",
+                description: "Intel Core i3, 4GB RAM, 500GB HDD, includes monitor, keyboard and mouse.",
+                image: "images/hp-desktop.jpg"
+            },
+            {
+                id: 3,
+                title: "Samsung 24\" LED Monitor",
+                price: "TSh 320,000",
+                description: "Full HD 1920x1080, HDMI + VGA ports, slim design with adjustable stand.",
+                image: "images/samsung-monitor.jpg"
+            },
+            {
+                id: 4,
+                title: "Logitech Wireless Mouse",
+                price: "TSh 35,000",
+                description: "Optical wireless mouse with USB receiver, 12-month battery life, comfortable grip.",
+                image: "images/wireless-mouse.jpg"
+            },
+            {
+                id: 5,
+                title: "Mechanical Gaming Keyboard",
+                price: "TSh 95,000",
+                description: "RGB backlit mechanical keyboard with blue switches, anti-ghosting, USB connection.",
+                image: "images/gaming-keyboard.jpg"
+            },
+            {
+                id: 6,
+                title: "External Hard Drive 1TB",
+                price: "TSh 120,000",
+                description: "USB 3.0 portable external hard drive, fast data transfer, compatible with PC and Mac.",
+                image: "images/external-hdd.jpg"
+            },
+            {
+                id: 7,
+                title: "USB Flash Drive 64GB",
+                price: "TSh 25,000",
+                description: "High-speed USB 3.0 flash drive, compact design with cap protection.",
+                image: "images/usb-flash.jpg"
+            },
+            {
+                id: 8,
+                title: "Webcam HD 1080p",
+                price: "TSh 85,000",
+                description: "Full HD webcam with built-in microphone, auto focus, USB plug-and-play.",
+                image: "images/webcam.jpg"
+            },
+            {
+                id: 9,
+                title: "Bluetooth Speaker",
+                price: "TSh 65,000",
+                description: "Portable wireless speaker with 10-hour battery life, premium sound quality.",
+                image: "images/bluetooth-speaker.jpg"
+            },
+            {
+                id: 10,
+                title: "Laptop Cooling Pad",
+                price: "TSh 45,000",
+                description: "5-fan cooling pad with LED lights, adjustable height, USB powered.",
+                image: "images/cooling-pad.jpg"
+            }
+        ];
+
+        // Printer & Office Supply Products Data
+        const printerProducts = [
+            {
+                id: 1,
+                title: "Canon PIXMA Inkjet Printer",
+                price: "TSh 280,000",
+                description: "All-in-one printer: print, scan, copy. WiFi enabled, mobile printing support, high quality photos.",
+                image: "images/canon-printer.jpg"
+            },
+            {
+                id: 2,
+                title: "HP LaserJet Pro Printer",
+                price: "TSh 450,000",
+                description: "Fast laser printer, 20 pages per minute, duplex printing, network ready, perfect for office use.",
+                image: "images/hp-laserjet.jpg"
+            },
+            {
+                id: 3,
+                title: "Epson EcoTank L3150",
+                price: "TSh 380,000",
+                description: "Refillable ink tank printer with WiFi, low cost printing, includes 2 years ink supply.",
+                image: "images/epson-ecotank.jpg"
+            },
+            {
+                id: 4,
+                title: "A4 Paper (Ream)",
+                price: "TSh 12,000",
+                description: "High quality A4 copy paper, 80GSM, 500 sheets per ream, bright white for clear printing.",
+                image: "images/a4-paper.jpg"
+            },
+            {
+                id: 5,
+                title: "Ink Cartridge Set",
+                price: "TSh 85,000",
+                description: "Compatible ink cartridges set (Black + Color) for Canon, HP, and Epson printers.",
+                image: "images/ink-cartridges.jpg"
+            },
+            {
+                id: 6,
+                title: "Office Desk Organizer",
+                price: "TSh 35,000",
+                description: "Wooden desk organizer with multiple compartments for pens, papers, and office supplies.",
+                image: "images/desk-organizer.jpg"
+            },
+            {
+                id: 7,
+                title: "Stapler with Staples",
+                price: "TSh 15,000",
+                description: "Heavy duty stapler with 1000 staples included, suitable for up to 25 sheets.",
+                image: "images/stapler.jpg"
+            },
+            {
+                id: 8,
+                title: "Document Scanner",
+                price: "TSh 220,000",
+                description: "High-speed document scanner, auto-feed, scan to PDF/JPEG, USB connectivity.",
+                image: "images/document-scanner.jpg"
+            },
+            {
+                id: 9,
+                title: "Laminating Machine",
+                price: "TSh 95,000",
+                description: "A4 thermal laminator with temperature control, includes 20 laminating pouches.",
+                image: "images/laminator.jpg"
+            },
+            {
+                id: 10,
+                title: "Office Chair",
+                price: "TSh 180,000",
+                description: "Ergonomic office chair with lumbar support, adjustable height, breathable mesh back.",
+                image: "images/office-chair.jpg"
+            }
+        ];
+
+        const whatsappNumber = "+255744065662";
+
+        function toggleDropdown(serviceType) {
+            // Close all other dropdowns first
+            const allDropdowns = ['cctv', 'access', 'alarm', 'computer', 'printer'];
+            allDropdowns.forEach(type => {
+                if (type !== serviceType) {
+                    const dropdown = document.getElementById(`${type}Dropdown`);
+                    dropdown.classList.remove('active');
+                }
+            });
+
+            // Toggle the selected dropdown
+            const dropdown = document.getElementById(`${serviceType}Dropdown`);
+            dropdown.classList.toggle('active');
             
-            // Uncomment the line below for actual navigation:
-            // window.location.href = servicePages[service];
+            // Load products if not already loaded
+            if (dropdown.classList.contains('active') && !dropdown.hasAttribute('data-loaded')) {
+                loadProducts(serviceType);
+                dropdown.setAttribute('data-loaded', 'true');
+            }
         }
 
-        // Add some interactive effects
-        document.addEventListener('DOMContentLoaded', function() {
-            const buttons = document.querySelectorAll('.service-button');
+        function createProductCard(product) {
+            return `
+                <div class="product-card">
+                    <img src="${product.image}" alt="${product.title}" class="product-image" 
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="image-placeholder" style="display: none;">
+                        📦 ${product.title}
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">${product.title}</h3>
+                        <div class="product-price">${product.price}</div>
+                        <p class="product-description">${product.description}</p>
+                        <button class="whatsapp-btn" onclick="openWhatsApp('${product.title}', '${product.price}')">
+                            <svg class="whatsapp-icon" viewBox="0 0 24 24">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                            </svg>
+                            Chat on WhatsApp
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function openWhatsApp(productTitle, productPrice) {
+            const message = `Hello! I'm interested in the ${productTitle} (${productPrice}). Could you please provide more information?`;
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${whatsappNumber.replace('+', '')}?text=${encodedMessage}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        function loadProducts(serviceType) {
+            let products, gridId;
             
-            buttons.forEach((button, index) => {
-                // Stagger the initial animation
-                button.style.opacity = '0';
-                button.style.transform = 'translateY(30px)';
-                
-                setTimeout(() => {
-                    button.style.transition = 'all 0.6s ease';
-                    button.style.opacity = '1';
-                    button.style.transform = 'translateY(0)';
-                }, index * 100);
+            switch(serviceType) {
+                case 'cctv':
+                    products = cctvProducts;
+                    gridId = 'cctvProductsGrid';
+                    break;
+                case 'access':
+                    products = accessProducts;
+                    gridId = 'accessProductsGrid';
+                    break;
+                case 'alarm':
+                    products = alarmProducts;
+                    gridId = 'alarmProductsGrid';
+                    break;
+                case 'computer':
+                    products = computerProducts;
+                    gridId = 'computerProductsGrid';
+                    break;
+                case 'printer':
+                    products = printerProducts;
+                    gridId = 'printerProductsGrid';
+                    break;
+                default:
+                    return;
+            }
+            
+            const productsGrid = document.getElementById(gridId);
+            productsGrid.innerHTML = '';
+            products.forEach(product => {
+                productsGrid.innerHTML += createProductCard(product);
             });
-        });
+        }
     </script>
 </body>
 </html>
